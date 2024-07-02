@@ -16,4 +16,15 @@ class UserController extends Controller
         $users = User::usersWithLastPurchaseDate();
         return view('users.last_purchase_date', compact('users'));
     }
+
+    /**
+     * Get users sortet by birthday
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function usersSortedByBirthday()
+    {
+        $users = User::usersSortedByBirthday();
+        return view('users.sorted_by_birthday', compact('users'));
+    }
 }

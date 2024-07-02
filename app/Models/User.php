@@ -60,4 +60,16 @@ class User extends Authenticatable
             ->groupBy('users.id')
             ->get();
     }
+
+    /**
+     * Get users sorted by birthday
+     *
+     * @return mixed
+     */
+    public static function usersSortedByBirthday()
+    {
+        return self::select('*')
+            ->orderByRaw('MONTH(birthdate), DAY(birthdate)')
+            ->get();
+    }
 }

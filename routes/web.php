@@ -9,3 +9,5 @@ Route::get('/', function () {
 
 Route::get('/users/last-purchase-date', [UserController::class, 'usersWithLastPurchaseDate']);
 
+Route::get('/users/sorted-by-birthday', [UserController::class, 'usersSortedByBirthday']);
+
