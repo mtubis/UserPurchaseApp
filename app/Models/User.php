@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -45,5 +46,18 @@ class User extends Authenticatable
             'password' => 'hashed',
             'birthdate' => 'date',
         ];
+    }
+
+    /**
+     * Get users with last purchase date.
+     *
+     * @return mixed
+     */
+    public static function usersWithLastPurchaseDate()
+    {
+        return self::leftJoin('purchases', 'users.id', '=', 'purchases.user_id')
+            ->select('users.*', DB::raw('MAX(purchases.purchase_date) as last_purchase_date'))
+            ->groupBy('users.id')
+            ->get();
     }
 }
