@@ -88,4 +88,15 @@ class User extends Authenticatable
         return self::whereBetween(DB::raw('DATE_FORMAT(birthdate, "%m-%d")'), [$startOfWeek->format('m-d'), $endOfWeek->format('m-d')])
             ->get();
     }
+
+
+    /**
+     * Define the relationship with Purchase
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
 }
