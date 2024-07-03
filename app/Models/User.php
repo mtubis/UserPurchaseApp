@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -70,6 +71,21 @@ class User extends Authenticatable
     {
         return self::select('*')
             ->orderByRaw('MONTH(birthdate), DAY(birthdate)')
+            ->get();
+    }
+
+    /**
+     * Get users with birthday this week
+     *
+     * @return mixed
+     */
+    public static function usersWithBirthdaysThisWeek()
+    {
+        $today = Carbon::now();
+        $startOfWeek = $today->startOfWeek();
+        $endOfWeek = $today->endOfWeek();
+
+        return self::whereBetween(DB::raw('DATE_FORMAT(birthdate, "%m-%d")'), [$startOfWeek->format('m-d'), $endOfWeek->format('m-d')])
             ->get();
     }
 }

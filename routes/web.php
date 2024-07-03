@@ -11,3 +11,5 @@ Route::get('/users/last-purchase-date', [UserController::class, 'usersWithLastPu
 
 Route::get('/users/sorted-by-birthday', [UserController::class, 'usersSortedByBirthday']);
 
+Route::get('/users/birthdays-this-week', [UserController::class, 'usersWithBirthdaysThisWeek']);
+

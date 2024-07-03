@@ -27,4 +27,15 @@ class UserController extends Controller
         $users = User::usersSortedByBirthday();
         return view('users.sorted_by_birthday', compact('users'));
     }
+
+    /**
+     * Get users with birthday this week
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function usersWithBirthdaysThisWeek()
+    {
+        $users = User::usersWithBirthdaysThisWeek();
+        return view('users.birthdays_this_week', compact('users'));
+    }
 }
