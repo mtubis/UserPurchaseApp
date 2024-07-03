@@ -82,11 +82,13 @@ class User extends Authenticatable
     public static function usersWithBirthdaysThisWeek()
     {
         $today = Carbon::now();
-        $startOfWeek = $today->startOfWeek();
-        $endOfWeek = $today->endOfWeek();
+        $startOfWeek = $today->copy()->startOfWeek()->format('m-d');
+        $endOfWeek = $today->copy()->endOfWeek()->format('m-d');
+        
+        $query = self::whereBetween(DB::raw('DATE_FORMAT(birthdate, "%m-%d")'), [$startOfWeek, $endOfWeek])
+            ->orderByRaw('MONTH(birthdate), DAY(birthdate)');
 
-        return self::whereBetween(DB::raw('DATE_FORMAT(birthdate, "%m-%d")'), [$startOfWeek->format('m-d'), $endOfWeek->format('m-d')])
-            ->get();
+        return $query->get();
     }
 
 
