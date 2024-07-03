@@ -6,24 +6,20 @@ use App\Models\User;
 use App\Models\Purchase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Carbon\Carbon;
 
 class UserControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    public function testUsersWithLastPurchaseDate()
     {
-        parent::setUp();
-
         // Seed test data
         User::factory()
             ->has(Purchase::factory()->count(3))
             ->count(10)
             ->create();
-    }
 
-    public function testUsersWithLastPurchaseDate()
-    {
         $response = $this->get(route('users.last_purchase_date'));
 
         $response->assertStatus(200);
