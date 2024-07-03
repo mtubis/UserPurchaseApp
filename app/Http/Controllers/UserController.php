@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
+     * Users index page
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function index()
+    {
+        return view('index');
+    }
+
+    /**
      * Get users with last purchase date.
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
